@@ -18,8 +18,8 @@
 	</div>
 	<div id="scoreScreen">
 		<h2>Words you got wrong: </h2>
-		<h2>Correct: </h2>
-		<h2>Total: </h2>
+		<h2 id="numCorrect">Correct: </h2>
+		<h2 id="numWrong">Total: </h2>
 		<h2 id="yourScore">Your score is: </h2>
 	</div>
 	<script>
@@ -82,7 +82,9 @@
 				document.getElementById('tingxieScreen').style.display = 'none';
 				document.getElementById('scoreScreen').style.display = "inline";
 				score();
-				document.getElementById('yourScore').innerHTML += score;
+				document.getElementById('yourScore').innerHTML += score.toFixed(2);
+				document.getElementById('numCorrect').innerHTML += numCorrect.toFixed(2);
+				document.getElementById('numWrong').innerHTML += (numWrong + numCorrect).toFixed(2);
 				return;
 			}
 			updateChar(lines[line]);
