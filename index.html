@@ -45,6 +45,7 @@
 		var numCorrect = 0;
 		var numWrong = 0;
 		var score;
+		var pinyin = document.getElementById('pinyin');
 
 		function checkEnter(e) 
 		{
@@ -56,7 +57,8 @@
 
 		function updateChar(string) 
 		{
-			document.getElementById('pinyin').innerHTML = string;
+			unfade(pinyin);
+			pinyin.innerHTML = string;
 		}
 
 		document.getElementById('file').onchange = function() 
@@ -79,6 +81,19 @@
 			return;
 		}
 
+		function unfade(element) {
+		    var op = 0.1;  // initial opacity
+		    element.style.display = 'block';
+		    var timer = setInterval(function () {
+		        if (op >= 1){
+		            clearInterval(timer);
+		        }
+		        element.style.opacity = op;
+		        element.style.filter = 'alpha(opacity=' + op * 100 + ")";
+		        op += op * 0.1;
+    		}, 10);
+		}
+
     	function getInput() 
     	{
 			input = document.getElementById('answer');
@@ -86,10 +101,12 @@
 			if (input.value == lines[line + 1]) {
 				result.style.color = "green";
 				result.innerHTML = "Correct!";
+				unfade(result);
 				numCorrect++;
 			} else {
 				result.innerHTML = "Incorrect!";
 				result.style.color = "red";
+				unfade(result);
 				numWrong++;
 			}
 			line=line+2;
@@ -103,6 +120,7 @@
 				return;
 			}
 			updateChar(lines[line]);
+			result.className = "hidden";
 			input.value = '';
 		}
 	</script>
