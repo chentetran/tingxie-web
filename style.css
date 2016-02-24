@@ -5,6 +5,15 @@ body {
 	background-color: #6699cc;
 }
 
+input[type="text"]
+{
+    font-size:24px;
+}
+
+#scoreScreen {
+	display: none;
+}
+
 #pinyin {
 	margin-bottom: 10px;
 	font-size: 40px;
@@ -17,7 +26,6 @@ body {
 #correct {
 	margin-top: 50px;
 	font-size: 50px;
-	color: green;
 	font-weight: bold;
 }
 

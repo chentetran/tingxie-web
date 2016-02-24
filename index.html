@@ -16,10 +16,20 @@
 		<input type="text" name="answer" id="answer" onkeyup="return checkEnter(event)"/>
 		<div id="correct"></div>
 	</div>
+	<div id="scoreScreen">
+		<h2>Words you got wrong: </h2>
+		<h2>Correct: </h2>
+		<h2>Total: </h2>
+		<h2 id="yourScore">Your score is: </h2>
+	</div>
 	<script>
 		var input;
 		var lines;
 		var line = 0;
+		var result = document.getElementById('correct');
+		var numCorrect = 0;
+		var numWrong = 0;
+		var score;
 
 		function checkEnter(e) 
 		{
@@ -48,17 +58,35 @@
   			document.getElementById('selectFileScreen').style.display = 'none';
 		}
 
+		function score()
+		{
+			score = numCorrect / (numCorrect + numWrong);
+			return;
+		}
+
     	function getInput() 
     	{
-			input = document.getElementById('answer').value;
-			if (input == lines[line + 1]) {
-				document.getElementById('correct').innerHTML = "Correct!";
+			input = document.getElementById('answer');
+
+			if (input.value == lines[line + 1]) {
+				result.style.color = "green";
+				result.innerHTML = "Correct!";
+				numCorrect++;
 			} else {
-				document.getElementById('correct').innerHTML = "Incorrect!";
+				result.innerHTML = "Incorrect!";
+				result.style.color = "red";
+				numWrong++;
 			}
 			line=line+2;
+			if (line === lines.length) {
+				document.getElementById('tingxieScreen').style.display = 'none';
+				document.getElementById('scoreScreen').style.display = "inline";
+				score();
+				document.getElementById('yourScore').innerHTML += score;
+				return;
+			}
 			updateChar(lines[line]);
-			console.log(line);
+			input.value = '';
 		}
 	</script>
 </body>
