@@ -41,6 +41,10 @@ input[type="text"]
 	font-weight: bold;
 }
 
+#showAnswer {
+	font-size: 25px;
+}
+
 h1 {
 	margin-right: auto;
 	margin-left: auto;
