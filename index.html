@@ -1,25 +1,37 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<!-- <link rel="stylesheet" type="text/css" href="style.css"> -->
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<link href='http://fonts.googleapis.com/css?family=Oleo+Script' rel='stylesheet' type='text/css'>
 	<title>听写</title>
 	<meta charset="utf-8"/>
 </head>
 <body>
-	<input type="file" name="file" id="file">
-	<input type="text" name="answer" id="answer">
-	<button id="submit"></button>
-	<div id="correct"></div>
-	<div id="character"></div>
-
+	<h1>听写练习</h1>
+	<div id="selectFileScreen">
+		<input type="file" name="file" id="file"/>
+	</div>
+	<div id="tingxieScreen">
+		<div id="pinyin"></div>
+		<input type="text" name="answer" id="answer" onkeyup="return checkEnter(event)"/>
+		<div id="correct"></div>
+	</div>
 	<script>
 		var input;
 		var lines;
 		var line = 0;
 
+		function checkEnter(e) 
+		{
+			if (e.keyCode == 13) {
+				getInput();
+				return false;
+			}
+		}
+
 		function updateChar(string) 
 		{
-			document.getElementById('character').innerHTML = string;
+			document.getElementById('pinyin').innerHTML = string;
 		}
 
 		document.getElementById('file').onchange = function() 
@@ -32,9 +44,11 @@
 			  	updateChar(lines[0]);
   			};
   			reader.readAsText(file);
+  			document.getElementById('tingxieScreen').style.display = 'inline';
+  			document.getElementById('selectFileScreen').style.display = 'none';
 		}
 
-    	document.getElementById('submit').onclick = function getInput() 
+    	function getInput() 
     	{
 			input = document.getElementById('answer').value;
 			if (input == lines[line + 1]) {
